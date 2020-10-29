@@ -6,26 +6,30 @@ from random import random as rd
 class fight:
 
     def __init__(self, hexxa1, hexxa2):
-        self.attacks1 = hexxa1.attacks
-        self.attacks2 = hexxa2.attacks
+        self.hexxa1 = hexxa1
+        self.hexxa2 = hexxa2
 
     def choose_attacks(self):
         atk1 = rd()
-        self.atk1 = self.attacks1[where(self.attacks1["probabilities"] > atk1)[0][0] + 1]
+        self.atk1 = self.hexxa1.attacks[where(self.hexxa1.attacks["probabilities"] > atk1)[0][0] + 1]
         atk2 = rd()
-        self.atk2 = self.attacks2[where(self.attacks2["probabilities"] > atk2)[0][0] + 1]
+        self.atk2 = self.hexxa2.attacks[where(self.hexxa2.attacks["probabilities"] > atk2)[0][0] + 1]
 
-    def resolve_fight(self, hexxa1, hexxa2):
-        print(hexxa1.name + " Usa:")
+    def resolve_fight(self):
+        print(self.hexxa1.name + " use:")
         print(self.atk1.name)
-        print(hexxa2.name + " Usa:")
-        print(self.atk2.name)
+        print(self.hexxa2.name + " use:")
+        print(self.atk2)
 
         if self.atk1.power > self.atk2.power:
-            hexxa2.resistance -= 1
-            print("Round won by hexxa1")
+            self.hexxa2.resistance -= 1 if not hexxa2.shield else 0
+            print("Round won by player 1")
         elif self.atk1.power < self.atk2.power:
-            hexxa1.resistance-= 1
-            print("Round won by hexxa2")
+            self.hexxa1.resistance-= 1 if not hexxa1.shield else 0
+            print("Round won by player 2")
         else:
             print("Round drawn")
+
+    def restore(self):
+        self.hexxa1.restoreAttacks()
+        self.hexxa2.restoreAttacks()

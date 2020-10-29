@@ -13,56 +13,56 @@ class attack:
             },
             2 :  {
                 "name" : "atk2",
-                "element" : 1,
+                "element" : 2,
                 "power" : 100,
                 "frequency" : 2
             },
             3 :  {
                 "name" : "atk3",
-                "element" : 1,
+                "element" : 3,
                 "power" : 100,
                 "frequency" : 2
             },
             4 :  {
                 "name" : "atk4",
-                "element" : 1,
+                "element" : 4,
                 "power" : 100,
                 "frequency" : 2
             },
             5 :  {
                 "name" : "atk5",
-                "element" : 1,
+                "element" : 5,
                 "power" : 100,
                 "frequency" : 2
             },
             6 :  {
                 "name" : "atk6",
-                "element" : 1,
+                "element" : 6,
                 "power" : 100,
                 "frequency" : 2
             },
             7 :  {
                 "name" : "atk7",
                 "element" : 1,
-                "power" : 100,
+                "power" : 200,
                 "frequency" : 2
             },
             8 :  {
                 "name" : "atk8",
-                "element" : 1,
-                "power" : 100,
+                "element" : 2,
+                "power" : 200,
                 "frequency" : 2
             },
             9 :  {
                 "name" : "atk9",
-                "element" : 1,
-                "power" : 100,
+                "element" : 3,
+                "power" : 200,
                 "frequency" : 2
             },
             10 :  {
                 "name" : "atk10",
-                "element" : 1,
-                "power" : 100,
+                "element" : 4,
+                "power" : 200,
                 "frequency" : 2
             },
         }
@@ -84,4 +84,4 @@ class attack:
         self.frequency = self.baseFrequency
 
     def __str__(self):
-        return self.name + " - " str(self.power)
+        return self.name + " - " + self.element.name + " - " + str(self.power)

@@ -1,6 +1,6 @@
 
-from objects.ability import ability
-from objects.element import element
+from objects.abilities import ability
+from objects.elements import element
 
 skills = {
     1 : {
@@ -103,13 +103,14 @@ skills = {
 class skill:
 
     def __init__(self, id):
-        self.name = skills[id].name
-        self.element = element(skills[id].elementId)
+        skill.id = id
+        self.name = skills[id]["name"]
+        self.element = element(skills[id]["elementId"]) if "elementId" in skills[id].keys() else None
         self.ability = ability(
-            id = skills[id].abilityTypeId,
-            duration = skills[id].duration,
-            quantity = skills[id].quantity if "quantity" in skills[id].keys() else None,
-            elementId = skills[id].elementId if "elementId" in skills[id].keys() else None
+            id = skills[id]["abilityTypeId"],
+            duration = skills[id]["duration"],
+            quantity = skills[id]["quantity"] if "quantity" in skills[id].keys() else None,
+            elementId = skills[id]["elementId"] if "elementId" in skills[id].keys() else None
         )
 
     def play(self, hexxa):

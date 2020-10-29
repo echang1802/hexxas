@@ -23,6 +23,7 @@ class elementalFrequency:
         for atk in range(6):
             if hexxa.attacks[atk].element.id == self.element:
                  hexxa.attacks[atk].frequency += self.quantity
+        hexxa.get_probs()
 
 class allPower:
 

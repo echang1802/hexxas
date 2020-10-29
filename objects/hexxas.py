@@ -2,7 +2,7 @@
 from numpy import array
 from random import choice, choices
 from objects.elements import element
-from objects.attacks import attack, get_probs
+from objects.attacks import attack
 
 def get_basic_stats(id):
     hexxas = {
@@ -38,8 +38,8 @@ class hexxas:
         totalFrequency = 0
         probs = array([0,0,0,0,0,0])
         for atk in range(6):
-            totalFrequency += self.attacks[atk].frequency
-            probs[atk - 1] = self.attacks[atk].frequency
+            totalFrequency += self.attacks[atk + 1].frequency
+            probs[atk] = self.attacks[atk + 1].frequency
         self.attacks["probabilities"] = probs.cumsum() / totalFrequency
 
     def create_hexxa(self, basicStats):
@@ -78,7 +78,13 @@ class hexxas:
         self.get_probs()
 
     def __str__(self):
-        return self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance)
+        aux = self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance) + "\nAttacks:"
+        for atk in range(6):
+            aux += "\n" + str(self.attacks[atk])
+        return aux
 
     def __repr__(self):
-        return self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance)
+        aux = self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance) + "\nAttacks:"
+        for atk in range(6):
+            aux += "\n" + str(self.attacks[atk + 1])
+        return aux
