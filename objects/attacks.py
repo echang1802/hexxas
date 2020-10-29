@@ -1,16 +1,6 @@
 
 from objects.elements import element
 
-def get_probs(attacks):
-    from numpy import array
-    totalFrequency = 0
-    probs = array([0,0,0,0,0,0])
-    for atk in attacks.keys():
-        totalFrequency += attacks[atk].frequency
-        probs[atk - 1] = attacks[atk].frequency
-    probs = probs.cumsum() / totalFrequency
-    return probs
-
 class attack:
 
     def __init__(self, id):
@@ -81,11 +71,17 @@ class attack:
         self.element = element(attacks[id]["element"])
         self.power = attacks[id]["power"]
         self.frequency = attacks[id]["frequency"]
+        self.basePower = attacks[id]["power"]
+        self.baseFrequency = attacks[id]["frequency"]
         self.stats = {
             "used" : 0,
             "hits" : 0,
             "fail" : 0
         }
 
+    def restore(self):
+        self.power = self.basePower
+        self.frequency = self.baseFrequency
+
     def __str__(self):
-        return self.name
+        return self.name + " - " str(self.power)

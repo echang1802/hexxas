@@ -1,4 +1,5 @@
 
+from numpy import array
 from random import choice, choices
 from objects.elements import element
 from objects.attacks import attack, get_probs
@@ -33,6 +34,14 @@ class hexxas:
         # Battles states variables
         self.shield = False
 
+    def get_probs(self):
+        totalFrequency = 0
+        probs = array([0,0,0,0,0,0])
+        for atk in range(6):
+            totalFrequency += self.attacks[atk].frequency
+            probs[atk - 1] = self.attacks[atk].frequency
+        self.attacks["probabilities"] = probs.cumsum() / totalFrequency
+
     def create_hexxa(self, basicStats):
         # Base stats
         self.resistance = basicStats["resistance"]
@@ -54,12 +63,19 @@ class hexxas:
             elif "pow" in stat:
                 atkNumber = int(stat.split("_")[1])
                 self.attacks[atkNumber].power += 100
+                self.attacks[atkNumber].basePower += 100
             else:
                 atkNumber = int(stat.split("_")[1])
                 self.attacks[atkNumber].frequency += 1
+                self.attacks[atkNumber].baseFrequency += 1
 
         # get attacks probabilities
-        self.attacks["probabilities"] = get_probs(self.attacks)
+        self.get_probs()
+
+    def restoreAttacks(self):
+        for atk in range(6):
+            self.attacks[atk].restore()
+        self.get_probs()
 
     def __str__(self):
         return self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance)

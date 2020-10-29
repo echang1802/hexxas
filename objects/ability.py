@@ -43,6 +43,7 @@ class allFrequency:
     def apply(self, hexxa):
         for atk in range(6):
             hexxa.attacks[atk].frequency += self.quantity
+        hexxa.get_probs()
 
 class shield:
 
