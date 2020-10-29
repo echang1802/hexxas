@@ -30,6 +30,8 @@ class hexxas:
             "fightsWon" : 0,
             "fightsLost" : 0
         }
+        # Battles states variables
+        self.shield = False
 
     def create_hexxa(self, basicStats):
         # Base stats

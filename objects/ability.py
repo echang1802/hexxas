@@ -50,7 +50,7 @@ class shield:
         self.duration = duration
 
     def apply(self, hexxa):
-        pass
+        hexxa.shield = True
 
 class ability:
 
