@@ -76,6 +76,7 @@ class attack:
                 "frequency" : 2
             },
         }
+        self.id = id
         self.name = attacks[id]["name"]
         self.element = element(attacks[id]["element"])
         self.power = attacks[id]["power"]

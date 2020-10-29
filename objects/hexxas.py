@@ -18,6 +18,7 @@ class hexxas:
 
     def __init__(self, id):
         basicStats = get_basic_stats(id)
+        self.id = id
         self.name = basicStats["name"]
         self.element = element(basicStats["element"])
         self.create_hexxa(basicStats)
