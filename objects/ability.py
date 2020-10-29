@@ -1,46 +1,71 @@
 
-abilities = {
-    1 : {
-        "effect" : "power",
-        "quantity" : 100,
-        "filter" : "element",
-        "duration" : 1
-    },
-    2 : {
-        "effect" : "frequency",
-        "quantity" : 1,
-        "filter" : "element",
-        "duration" : 1
-    },
-    3 : {
-        "effect" : "power",
-        "quantity" : 100,
-        "filter" : None,
-        "duration" : 1
-    },
-    4 : {
-        "effect" : "power",
-        "quantity" : 200,
-        "filter" : "element",
-        "duration" : 1
-    },
-    5 : {
-        "effect" : "frequency",
-        "quantity" : 2,
-        "filter" : "element",
-        "duration" : 1
-    },
-    6 : {
-        "effect" : "shield",
-        "duration" : 1
-    }
-}
+
+class elementalPower:
+
+    def __init__(self, quantity, elementId, duration):
+        self. quantity = quantity
+        self.element = elementId
+        self.duration = duration
+
+    def apply(self, hexxa):
+        for atk in range(6):
+            if hexxa.attacks[atk].element.id == self.element:
+                 hexxa.attacks[atk].power += self.quantity
+
+class elementalFrequency:
+
+    def __init__(self, quantity, elementId, duration):
+        self.quantity = quantity,
+        self.element = elementId
+        self.duration = duration
+
+    def apply(hexxa):
+        for atk in range(6):
+            if hexxa.attacks[atk].element.id == self.element:
+                 hexxa.attacks[atk].frequency += self.quantity
+
+class allPower:
+
+    def __init__(self, quantity, duration):
+        self. quantity = quantity
+        self.duration = duration
+
+    def apply(self, hexxa):
+        for atk in range(6):
+            hexxa.attacks[atk].power += self.quantity
+
+class allFrequency:
+
+    def __init__(self, quantity, duration):
+        self. quantity = quantity
+        self.duration = duration
+
+    def apply(self, hexxa):
+        for atk in range(6):
+            hexxa.attacks[atk].frequency += self.quantity
+
+class shield:
+
+    def __init__(self, duration):
+        self.duration = duration
+
+    def apply(self, hexxa):
+        pass
 
 class ability:
 
-    def __init__(self, id):
+    def __init__(self, id, duration, quantity = None, elementId = None):
         self.id = id
-        self.effect = abilities[id].effect
-        self.quantity = abilities[id].quantity if quantity in abilities[id].keys() else None
-        self.filter = abilities[id].filter if quantity in abilities[id].keys() else None
-        self.duration = abilities[id].duration if quantity in abilities[id].keys() else None
+        if id == 1:
+            self.ability = elementalPower(quantity, elementId, duration)
+        elif id == 2:
+            self.ability = elementalFrequency(quantity, elementId, duration)
+        elif id == 3:
+            self.ability = allPower(quantity, duration)
+        elif id == 4:
+            self.ability = allFrequency(quantity, duration)
+        elif id == 5:
+            self.ability = shield(duration)
+
+    def apply(self, hexxa):
+        self.ability.apply(hexxa)
