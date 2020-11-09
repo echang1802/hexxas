@@ -29,7 +29,7 @@ class element:
                 "ability" : ""
             },
         }
-
+        self.id = id
         self.name = elements[id]["name"]
         self.ability = elements[id]["ability"]
 

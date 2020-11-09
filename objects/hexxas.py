@@ -1,7 +1,8 @@
 
+from numpy import array
 from random import choice, choices
 from objects.elements import element
-from objects.attacks import attack, get_probs
+from objects.attacks import attack
 
 def get_basic_stats(id):
     hexxas = {
@@ -18,6 +19,7 @@ class hexxas:
 
     def __init__(self, id):
         basicStats = get_basic_stats(id)
+        self.id = id
         self.name = basicStats["name"]
         self.element = element(basicStats["element"])
         self.create_hexxa(basicStats)
@@ -29,6 +31,16 @@ class hexxas:
             "fightsWon" : 0,
             "fightsLost" : 0
         }
+        # Battles states variables
+        self.shield = False
+
+    def get_probs(self):
+        totalFrequency = 0
+        probs = array([0,0,0,0,0,0])
+        for atk in range(6):
+            totalFrequency += self.attacks[atk + 1].frequency
+            probs[atk] = self.attacks[atk + 1].frequency
+        self.attacks["probabilities"] = probs.cumsum() / totalFrequency
 
     def create_hexxa(self, basicStats):
         # Base stats
@@ -51,15 +63,29 @@ class hexxas:
             elif "pow" in stat:
                 atkNumber = int(stat.split("_")[1])
                 self.attacks[atkNumber].power += 100
+                self.attacks[atkNumber].basePower += 100
             else:
                 atkNumber = int(stat.split("_")[1])
                 self.attacks[atkNumber].frequency += 1
+                self.attacks[atkNumber].baseFrequency += 1
 
         # get attacks probabilities
-        self.attacks["probabilities"] = get_probs(self.attacks)
+        self.get_probs()
+
+    def restoreAttacks(self):
+        self.shield = False
+        for atk in range(6):
+            self.attacks[atk + 1].restore()
+        self.get_probs()
 
     def __str__(self):
-        return self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance)
+        aux = self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance) + "\nAttacks:"
+        for atk in range(6):
+            aux += "\n" + str(self.attacks[atk + 1])
+        return aux
 
     def __repr__(self):
-        return self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance)
+        aux = self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance) + "\nAttacks:"
+        for atk in range(6):
+            aux += "\n" + str(self.attacks[atk + 1])
+        return aux
