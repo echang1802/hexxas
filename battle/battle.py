@@ -56,7 +56,8 @@ class battle:
         action = int(input())
         if action == 0:
             return
-        self.hands[player][action + 1].play(self.hexxa[player])
+        self.hands[player][action - 1].play(self.hexxa[player])
+        self.hands[player].pop(action - 1)
         self.ap -= 1
 
     def turn(self, player):

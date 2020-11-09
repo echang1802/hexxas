@@ -73,14 +73,15 @@ class hexxas:
         self.get_probs()
 
     def restoreAttacks(self):
+        self.shield = False
         for atk in range(6):
-            self.attacks[atk].restore()
+            self.attacks[atk + 1].restore()
         self.get_probs()
 
     def __str__(self):
         aux = self.name + "\nElement: " + self.element.name + "\nResistance: " + str(self.resistance) + "\nAttacks:"
         for atk in range(6):
-            aux += "\n" + str(self.attacks[atk])
+            aux += "\n" + str(self.attacks[atk + 1])
         return aux
 
     def __repr__(self):

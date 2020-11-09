@@ -90,7 +90,7 @@ skills = {
     13 : {
         "name" : "pow1",
         "abilityTypeId"  : 3,
-        "quantity" : 1,
+        "quantity" : 100,
         "duration" : 1
     },
     14 : {

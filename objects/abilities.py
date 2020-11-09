@@ -7,22 +7,22 @@ class elementalPower:
         self.element = elementId
         self.duration = duration
 
-    def apply(self, hexxa):
+    def apply_ability(self, hexxa):
         for atk in range(6):
-            if hexxa.attacks[atk].element.id == self.element:
-                 hexxa.attacks[atk].power += self.quantity
+            if hexxa.attacks[atk + 1].element.id == self.element:
+                 hexxa.attacks[atk + 1].power += self.quantity
 
 class elementalFrequency:
 
     def __init__(self, quantity, elementId, duration):
-        self.quantity = quantity,
+        self.quantity = quantity
         self.element = elementId
         self.duration = duration
 
-    def apply(hexxa):
+    def apply_ability(self, hexxa):
         for atk in range(6):
-            if hexxa.attacks[atk].element.id == self.element:
-                 hexxa.attacks[atk].frequency += self.quantity
+            if hexxa.attacks[atk + 1].element.id == self.element:
+                 hexxa.attacks[atk + 1].frequency += self.quantity
         hexxa.get_probs()
 
 class allPower:
@@ -31,9 +31,9 @@ class allPower:
         self. quantity = quantity
         self.duration = duration
 
-    def apply(self, hexxa):
+    def apply_ability(self, hexxa):
         for atk in range(6):
-            hexxa.attacks[atk].power += self.quantity
+            hexxa.attacks[atk + 1].power += self.quantity
 
 class allFrequency:
 
@@ -41,9 +41,9 @@ class allFrequency:
         self. quantity = quantity
         self.duration = duration
 
-    def apply(self, hexxa):
+    def apply_ability(self, hexxa):
         for atk in range(6):
-            hexxa.attacks[atk].frequency += self.quantity
+            hexxa.attacks[atk + 1].frequency += self.quantity
         hexxa.get_probs()
 
 class shield:
@@ -51,7 +51,7 @@ class shield:
     def __init__(self, duration):
         self.duration = duration
 
-    def apply(self, hexxa):
+    def apply_ability(self, hexxa):
         hexxa.shield = True
 
 class ability:
@@ -70,4 +70,4 @@ class ability:
             self.ability = shield(duration)
 
     def apply(self, hexxa):
-        self.ability.apply(hexxa)
+        self.ability.apply_ability(hexxa)

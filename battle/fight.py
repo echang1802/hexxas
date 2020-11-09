@@ -16,16 +16,16 @@ class fight:
         self.atk2 = self.hexxa2.attacks[where(self.hexxa2.attacks["probabilities"] > atk2)[0][0] + 1]
 
     def resolve_fight(self):
-        print(self.hexxa1.name + " use:")
-        print(self.atk1.name)
-        print(self.hexxa2.name + " use:")
+        print("Player1 " + self.hexxa1.name + " use:")
+        print(self.atk1)
+        print("Player2 " + self.hexxa2.name + " use:")
         print(self.atk2)
 
         if self.atk1.power > self.atk2.power:
-            self.hexxa2.resistance -= 1 if not hexxa2.shield else 0
+            self.hexxa2.resistance -= 1 if not self.hexxa2.shield else 0
             print("Round won by player 1")
         elif self.atk1.power < self.atk2.power:
-            self.hexxa1.resistance-= 1 if not hexxa1.shield else 0
+            self.hexxa1.resistance-= 1 if not self.hexxa1.shield else 0
             print("Round won by player 2")
         else:
             print("Round drawn")
