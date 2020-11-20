@@ -1,6 +1,6 @@
 
 from numpy import array
-from random import choice, choices
+from random import sample, choices, random
 from objects.elements import element
 from objects.attacks import attack
 
@@ -15,6 +15,9 @@ def get_basic_stats(id):
     }
     return hexxas[id]
 
+def growthParameterGen(minP, maxP):
+    return round(minP + (maxP - minP) * random())
+
 class hexxas:
 
     def __init__(self, id):
@@ -24,6 +27,7 @@ class hexxas:
         self.element = element(basicStats["element"])
         self.create_hexxa(basicStats)
         self.exerience = {
+            "tier" : 10,
             "experience" : 0,
             "battles" : 0,
             "battlesWon" : 0,
@@ -45,7 +49,7 @@ class hexxas:
     def create_hexxa(self, basicStats):
         # Base stats
         self.resistance = basicStats["resistance"]
-        attacks = choices(basicStats["attacks"], k = 6)
+        attacks = sample(basicStats["attacks"], k = 6)
         self.attacks = {
             1 : attack(attacks[0]),
             2 : attack(attacks[1]),
@@ -71,6 +75,20 @@ class hexxas:
 
         # get attacks probabilities
         self.get_probs()
+
+        # Growth parameters
+        self.growth = {
+            10 :  growthParameterGen(10, 15),
+            9 :  growthParameterGen(10, 20),
+            8 :  growthParameterGen(10, 20),
+            7 :  growthParameterGen(10, 25),
+            6 :  growthParameterGen(10, 25),
+            5 :  growthParameterGen(10, 25),
+            4 :  growthParameterGen(15, 25),
+            3 :  growthParameterGen(15, 30),
+            2 :  growthParameterGen(20, 35),
+            1 :  growthParameterGen(30, 40)
+        }
 
     def restoreAttacks(self):
         self.shield = False
