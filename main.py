@@ -1,11 +1,7 @@
 
-from objects.decks import deck
-from objects.hexxas import hexxas
-from battle.battle import battle
+from menu.main_menu import main_menu
 
-fight = battle([
-    hexxas(1),hexxas(1),hexxas(1)
-],[
-    hexxas(1),hexxas(1),hexxas(1)
-], deck(), deck())
-fight.battle()
+if __name__ == "__main__":
+    menu = main_menu()
+
+    menu.start_menu()
