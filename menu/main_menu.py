@@ -1,8 +1,5 @@
 
-
-from objects.decks import deck
-from objects.hexxas import hexxas
-from battle.battle import battle
+from game import game
 
 class main_menu:
 
@@ -31,9 +28,5 @@ class main_menu:
     def action(self, selected):
         if self.options[selected] == "Exit":
             return True
-        fight = battle([
-            hexxas(1),hexxas(1),hexxas(1)
-        ],[
-            hexxas(1),hexxas(1),hexxas(1)
-        ], deck(), deck())
-        fight.battle()
+        newGame = game()
+        newGame.start()
