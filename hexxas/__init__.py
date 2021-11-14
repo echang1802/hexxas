@@ -23,19 +23,16 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
     from . import db
     db.init_app(app)
 
     from . import auth
     app.register_blueprint(auth.bp)
 
-    from . import blog
+    from . import menu
     app.register_blueprint(menu.bp)
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+    #<a class="action" href="{{ url_for('menu.index') }}">Return</a>
