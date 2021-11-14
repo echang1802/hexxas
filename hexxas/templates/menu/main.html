@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Main Menu{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if g.user %}
+    <a class="action" href="{{ url_for('menu.rankings') }}">Rankings</a>
+    <a class="action" href="{{ url_for('menu.about') }}">About</a>
+    <p class="body">Loged in</p>
+  {% else %}
+    <a class="action" href="{{ url_for('menu.rankings') }}">Rankings</a>
+    <a class="action" href="{{ url_for('menu.about') }}">About</a>
+  {% endif %}
+{% endblock %}
